@@ -88,3 +88,5 @@ Route::middleware(['auth']) // <-- ¡¡MODIFICADO!!
     ->group(function () {
         require __DIR__.'/admin.php';
     });
+
+//HOLA PAUL
