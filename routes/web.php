@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Features;
 use Livewire\Volt\Volt;
 
-// --- TUS RUTAS PÚBLICAS Y DE USUARIO (INTACTAS) ---
+// --- TUS RUTAS PÚBLICAS Y DE USUARIO  ---
 
 Route::get('/', function () {
     return view('welcome');
@@ -51,14 +51,10 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/{order}', \App\Livewire\Client\Orders\Show::class)->name('show');
         });
 
-    // --- MÓDULO DEL REPARTIDOR (¡NUEVO!) ---
     /*
-    |--------------------------------------------------------------------------
-    | Rutas del Repartidor
-    |--------------------------------------------------------------------------
-    |
-    | Un dashboard simple para que el repartidor vea sus tareas.
-    |
+
+    Rutas del Repartidor
+
     */
     Route::middleware('role:repartidor')
         ->prefix('mis-tareas')
@@ -67,26 +63,17 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/', \App\Livewire\Repartidor\Dashboard::class)->name('dashboard');
         });
 
-}); // <-- FIN DEL GRUPO 'auth'
+}); 
 
 
 
-// --- ¡AQUÍ ESTÁ LA MAGIA DE ESCALABILIDAD! ---
 /*
-|--------------------------------------------------------------------------
-| Cargador de Rutas de Administración
-|--------------------------------------------------------------------------
-|
-| ¡¡CAMBIO!! Quitamos 'role:admin' de aquí.
-| Ahora solo pedimos que esté logueado.
-| La seguridad de roles la pondremos en 'admin.php'.
-|
+Rutas de Administración
 */
-Route::middleware(['auth']) // <-- ¡¡MODIFICADO!!
+Route::middleware(['auth']) 
     ->prefix('admin')
     ->name('admin.')
     ->group(function () {
         require __DIR__.'/admin.php';
     });
 
-//HOLA PAUL
