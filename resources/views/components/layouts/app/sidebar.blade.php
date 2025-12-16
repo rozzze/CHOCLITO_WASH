@@ -36,6 +36,22 @@
                         wire:navigate>
                         {{ __('Servicios') }}
                     </flux:navlist.item>
+                    
+                    <flux:navlist.item 
+                        icon="users" 
+                        :href="route('admin.users.index')" 
+                        :current="request()->routeIs('admin.users.*')" 
+                        wire:navigate>
+                        {{ __('Usuarios') }}
+                    </flux:navlist.item>
+
+                    <flux:navlist.item 
+                        icon="chart-bar" 
+                        :href="route('admin.reports.index')" 
+                        :current="request()->routeIs('admin.reports.*')" 
+                        wire:navigate>
+                        {{ __('Reportes') }}
+                    </flux:navlist.item>
                     @endrole
                     
                     {{-- 3. ENLACES DE CLIENTE --}}

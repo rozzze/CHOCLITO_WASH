@@ -7,11 +7,19 @@ use App\Livewire\Admin\Services\Index as ServiceIndex;
 use App\Livewire\Admin\Services\Create as ServiceCreate;
 use App\Livewire\Admin\Services\Edit as ServiceEdit;
 
+use App\Livewire\Admin\Users\Index as UserIndex;
+
 // ¡CAMBIO 1! Grupo solo para el Admin
 Route::middleware('role:admin')->group(function () {
     Route::get('servicios', ServiceIndex::class)->name('services.index');
     Route::get('servicios/crear', ServiceCreate::class)->name('services.create');
     Route::get('servicios/{service}/editar', ServiceEdit::class)->name('services.edit');
+
+    // Módulo de Usuarios
+    Route::get('usuarios', UserIndex::class)->name('users.index');
+
+    // Módulo de Reportes
+    Route::get('reportes', \App\Livewire\Admin\Reports\Index::class)->name('reports.index');
 });
 
 
