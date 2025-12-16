@@ -1,7 +1,15 @@
-<div class="p-6">
-    <div class="mb-8">
-        <h1 class="text-2xl font-bold text-gray-900 dark:text-white">Reportes Avanzados</h1>
-        <p class="text-gray-500 dark:text-gray-400">Analiza el rendimiento del negocio con múltiples filtros.</p>
+<div>
+        <div class="mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+        <div>
+            <h1 class="text-2xl font-bold text-gray-900 dark:text-white">Reportes Avanzados</h1>
+            <p class="text-gray-500 dark:text-gray-400">Analiza el rendimiento del negocio con múltiples filtros.</p>
+        </div>
+        <button wire:click="exportPdf" wire:loading.attr="disabled" class="inline-flex items-center px-4 py-2 bg-red-600 border border-transparent rounded-lg font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 active:bg-red-700 focus:outline-none focus:border-red-700 focus:ring focus:ring-red-200 disabled:opacity-25 transition cursor-pointer">
+            <svg class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+            Exportar a PDF
+        </button>
     </div>
 
     {{-- Resumen Cards --}}
@@ -162,4 +170,6 @@
             {{ $orders->links() }}
         </div>
     </div>
+</div>
+
 </div>

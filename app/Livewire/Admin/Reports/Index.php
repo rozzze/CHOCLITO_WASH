@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Service;
 use Carbon\Carbon;
 use Livewire\Attributes\Layout;
+use Barryvdh\DomPDF\Facade\Pdf; // Import PDF Facade
 
 class Index extends Component
 {
@@ -67,6 +68,31 @@ class Index extends Component
             'total_revenue' => $query->sum('total_amount'),
             'avg_ticket' => $query->avg('total_amount') ?? 0,
         ];
+    }
+    
+    public function exportPdf()
+    {
+        $orders = $this->buildQuery()
+            ->orderBy($this->sortBy, $this->sortDesc ? 'desc' : 'asc')
+            ->get(); // Get all results without pagination
+            
+        $data = [
+            'orders' => $orders,
+            'summary' => $this->summary, // Uses the computed property
+            'filters' => [
+                'dateFrom' => $this->dateFrom,
+                'dateTo' => $this->dateTo,
+                'status' => $this->status,
+                'clientId' => $this->clientId,
+                'repartidorId' => $this->repartidorId
+            ]
+        ];
+
+        $pdf = Pdf::loadView('pdf.report', $data);
+        
+        return response()->streamDownload(function () use ($pdf) {
+            echo $pdf->output();
+        }, 'reporte-' . now()->format('Y-m-d-His') . '.pdf');
     }
 
     /* Construcción de la Query */
